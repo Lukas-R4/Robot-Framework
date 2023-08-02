@@ -1,0 +1,17 @@
+1690936516398	geckodriver	INFO	Listening on 127.0.0.1:59575
+1690936516930	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... te" "--remote-debugging-port" "54343" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileqk047n"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1690936519227	Marionette	INFO	Marionette enabled
+1690936519728	Marionette	INFO	Listening on port 33329
+Read port: 33329
+WebDriver BiDi listening on ws://127.0.0.1:54343
+1690936519958	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+DevTools listening on ws://127.0.0.1:54343/devtools/browser/fe848fa2-34a1-48db-882d-02a376649ef4
+JavaScript warning: https://www.amazon.com.br/, line 1866: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.amazon.com.br/Eletronicos-e-Tecnologia/b/?ie=UTF8&node=16209062011&ref_=nav_cs_electronics, line 55803: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1690936534779	Marionette	INFO	Stopped listening on port 33329

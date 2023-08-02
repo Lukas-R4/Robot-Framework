@@ -26,4 +26,4 @@ Caso de Teste 02 - Pesquisa de um Produto
     Acessar a home page do site Amazon.com.br
     Digitar o nome de produto "Xbox Series S" no campo de pesquisa
     Clicar no botão de pesquisa
-    Verificar o resultado da pesquisa se está listando o produto "Erro Proposital"
+    Verificar o resultado da pesquisa se está listando o produto "Xbox Series S"

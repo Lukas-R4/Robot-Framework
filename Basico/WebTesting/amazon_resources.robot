@@ -2,7 +2,7 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-
+${BROWSER}    chrome
 ${URL}    https://www.amazon.com.br/
 ${MENU_ELETRONICOS}    (//a[contains(@tabindex,'0')])[12]
 ${HEADER_ELETRONICOS}    //h1[contains(.,'Eletrônicos e Tecnologia')]
@@ -10,7 +10,7 @@ ${BOTAO_PESQUISAR}    nav-search-submit-button
 
 *** Keywords ***
 Abrir o navegador
-    Open Browser    browser=chrome
+    Open Browser    browser=${BROWSER}
     Maximize Browser Window
 
 Fechar o navegador
@@ -41,4 +41,4 @@ Clicar no botão de pesquisa
     Click Element    ${BOTAO_PESQUISAR}
 
 Verificar o resultado da pesquisa se está listando o produto "${PRODUTO}"
-    Wait Until Element Is Visible    //span[@class='a-size-base-plus a-color-base a-text-normal'][contains(.,'${PRODUTO}')]
+    Wait Until Page Contains    ${PRODUTO}
