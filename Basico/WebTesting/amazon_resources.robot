@@ -7,6 +7,11 @@ ${URL}    https://www.amazon.com.br/
 ${MENU_ELETRONICOS}    (//a[contains(@tabindex,'0')])[12]
 ${HEADER_ELETRONICOS}    //h1[contains(.,'Eletrônicos e Tecnologia')]
 ${BOTAO_PESQUISAR}    nav-search-submit-button
+${XBOX_SERIES_S}    (//a[contains(.,'Xbox Series S')])[3]
+${BTN_ADICIONAR_AO_CARRINHO}     add-to-cart-button
+${AVISO_SUCESSO}    NATC_SMART_WAGON_CONF_MSG_SUCCESS
+${CARRINHO}    nav-cart
+${CARRINHO_VAZIO}    //h1[contains(.,'Seu carrinho de compras da Amazon está vazio.')]
 
 *** Keywords ***
 Abrir o navegador
@@ -65,3 +70,24 @@ Então o título da página deve ficar "${TITULO}"
 
 E um produto da linha "Xbox Series S" deve ser mostrado na página
     Verificar o resultado da pesquisa se está listando o produto "Xbox Series S"
+
+Adicionar o produto "Console Xbox Series S" no carrinho
+    Click Element    ${XBOX_SERIES_S}
+    Wait Until Element Is Visible    ${BTN_ADICIONAR_AO_CARRINHO}
+    Click Element    ${BTN_ADICIONAR_AO_CARRINHO}
+    Wait Until Element Is Visible    ${AVISO_SUCESSO}
+    Page Should Contain    Adicionado ao carrinho
+
+Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
+    Click Element    ${CARRINHO}
+    Element Should Contain    sc-active-cart    ${NOME_PRODUTO}
+
+Remover o produto "${NOME_PRODUTO}" do carrinho
+    Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
+    Click Element    //input[@value='Excluir']
+    Wait Until Element Is Visible    ${CARRINHO_VAZIO}
+    Page Should Contain    foi removido de Carrinho de compras.
+
+Verificar se o carrinho fica vazio
+    Click Element    ${CARRINHO}
+    Page Should Contain    Seu carrinho da Amazon está vazio
