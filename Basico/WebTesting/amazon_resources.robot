@@ -6,7 +6,7 @@ Library    SeleniumLibrary
 *** Variables ***
 ${BROWSER}    chrome
 ${URL}    https://www.amazon.com.br/
-${MENU_ELETRONICOS}    (//a[contains(@tabindex,'0')])[12]
+${MENU_ELETRONICOS}    (//a[contains(@tabindex,'0')])[13]
 ${HEADER_ELETRONICOS}    //h1[contains(.,'Eletrônicos e Tecnologia')]
 ${BOTAO_PESQUISAR}    nav-search-submit-button
 ${XBOX_SERIES_S}    (//a[contains(.,'Xbox Series S')])[3]
@@ -14,6 +14,7 @@ ${BTN_ADICIONAR_AO_CARRINHO}     add-to-cart-button
 ${AVISO_SUCESSO}    NATC_SMART_WAGON_CONF_MSG_SUCCESS
 ${CARRINHO}    nav-cart
 ${CARRINHO_VAZIO}    //h1[contains(.,'Seu carrinho de compras da Amazon está vazio.')]
+${CARRINHO_INTERNO}    (//span[@aria-hidden='true'])[9]
 
 *** Keywords ***
 ###############################################################################
@@ -25,7 +26,7 @@ Abrir o navegador
 Fechar o navegador
     [Documentation]    Executado no gancho TearDown
     Capture Page Screenshot
-    # Close Browser
+    Close Browser
 
 ###########################################################################################################
 ############################################## Procedural STEPS ##############################################
@@ -79,9 +80,11 @@ Então o título da página deve ficar "${TITULO}"
     Verificar se o título da página fica "${TITULO}"
 
 E um produto da linha "Xbox Series S" deve ser mostrado na página
+    Wait Until Page Contains    Xbox Series S
     Verificar o resultado da pesquisa se está listando o produto "Xbox Series S"
 
-Adicionar o produto "Console Xbox Series S" no carrinho
+Adicionar o produto "${PRODUTO}" no carrinho
+    Wait Until Element Is Visible    ${XBOX_SERIES_S}
     Click Element    ${XBOX_SERIES_S}
     Wait Until Element Is Visible    ${BTN_ADICIONAR_AO_CARRINHO}
     Click Element    ${BTN_ADICIONAR_AO_CARRINHO}
@@ -90,7 +93,7 @@ Adicionar o produto "Console Xbox Series S" no carrinho
 
 Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
     Click Element    ${CARRINHO}
-    Element Should Contain    sc-active-cart    ${NOME_PRODUTO}
+    Element Should Contain    ${CARRINHO_INTERNO}    ${NOME_PRODUTO}
 
 Remover o produto "${NOME_PRODUTO}" do carrinho
     Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
@@ -108,3 +111,13 @@ Quando adicionar o produto "${NOME_PRODUTO}" no carrinho
 
 Então o produto "${NOME_PRODUTO}" deve ser mostrado no carrinho
     Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
+
+E existe o produto "${NOME_PRODUTO}" no carrinho
+    Quando adicionar o produto "${NOME_PRODUTO}" no carrinho
+    Então o produto "${NOME_PRODUTO}" deve ser mostrado no carrinho
+
+Quando remover o produto "${NOME_PRODUTO}" do carrinho
+    Remover o produto "${NOME_PRODUTO}" do carrinho
+
+Então o carrinho deve ficar vazio
+    Verificar se o carrinho fica vazio
