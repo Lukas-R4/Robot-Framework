@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation  Bibliotecas que serão utilizadas nos casos
+...            de teste.
 Library    SeleniumLibrary
 
 *** Variables ***
@@ -14,14 +16,20 @@ ${CARRINHO}    nav-cart
 ${CARRINHO_VAZIO}    //h1[contains(.,'Seu carrinho de compras da Amazon está vazio.')]
 
 *** Keywords ***
+###############################################################################
 Abrir o navegador
+    [Documentation]    Executado no gancho Setup
     Open Browser    browser=${BROWSER}
     Maximize Browser Window
 
 Fechar o navegador
+    [Documentation]    Executado no gancho TearDown
     Capture Page Screenshot
-    Close Browser
+    # Close Browser
 
+###########################################################################################################
+############################################## Procedural STEPS ##############################################
+###########################################################################################################
 Acessar a home page do site Amazon.com.br
     Go To    ${URL}
     Wait Until Element Is Visible    locator=${MENU_ELETRONICOS}
@@ -48,7 +56,9 @@ Clicar no botão de pesquisa
 Verificar o resultado da pesquisa se está listando o produto "${PRODUTO}"
     Wait Until Page Contains    ${PRODUTO}
 
-# GHERKIN STEPS
+###########################################################################################################
+############################################## GHERKIN STEPS ##############################################
+###########################################################################################################
 
 Dado que estou na home page da Amazon.com.br
     Acessar a home page do site Amazon.com.br
@@ -91,3 +101,10 @@ Remover o produto "${NOME_PRODUTO}" do carrinho
 Verificar se o carrinho fica vazio
     Click Element    ${CARRINHO}
     Page Should Contain    Seu carrinho da Amazon está vazio
+
+Quando adicionar o produto "${NOME_PRODUTO}" no carrinho
+    Quando pesquisar pelo produto "Xbox Series S"
+    Adicionar o produto "Console Xbox Series S" no carrinho
+
+Então o produto "${NOME_PRODUTO}" deve ser mostrado no carrinho
+    Verificar se o produto "${NOME_PRODUTO}" foi adicionado com sucesso
