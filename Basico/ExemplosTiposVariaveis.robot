@@ -1,14 +1,14 @@
 *** Settings ***
 Documentation   Exemplo de tipos de variáveis: SIMPLES, LISTAS e DICIONÁRIOS
 *** Variable ***
-#Simples
+#Simples - Valor único
 ${SIMPLES}   Vamos ver os tipos de variáveis no robot!
 
 #Tipo Lista (arrays) - separar itens com espaço duplo
 @{FRUTAS}    morango   banana   maça   uva   abacaxi
 
 #Tipo Dicionário (chave=valor) - separar cada chave=valor com espaço duplo
-&{PESSOA}    nome=May Fernandes   email=mayfernandes@exemplo.com.br   idade=28   sexo=feminino
+&{PESSOA}    nome=Lucas Rodrigues   email=lucas@exemplo.com.br   idade=25   sexo=masculino
 
 *** Test Cases ***
 Caso de teste de exemplo 01
