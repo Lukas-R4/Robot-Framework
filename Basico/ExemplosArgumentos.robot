@@ -2,7 +2,7 @@
 Documentation   Exemplo de uso de variáveis como argumentos em Keywords
 
 *** Variable ***
-&{PESSOA}       nome=May Fernandes   email=mayfernandes@exemplo.com.br   idade=20   sexo=feminino
+&{PESSOA}       nome=Lucas Rodrigues   email=lucas@exemplo.com.br   idade=25   sexo=masculino
 
 *** Test Cases ***
 Caso de teste de exemplo 01
@@ -10,8 +10,6 @@ Caso de teste de exemplo 01
 
 *** Keywords ***
 Uma keyword qualquer 01
-    Uma subkeyword com argumentos   Bruno Silva   bruno_silva@teste.com.br
-    Uma subkeyword com argumentos   ${PESSOA.nome}   ${PESSOA.email}
     ${MENSAGEM_ALERTA}   Uma subkeyword com retorno   ${PESSOA.nome}   ${PESSOA.idade}
     Log     ${MENSAGEM_ALERTA}
 
